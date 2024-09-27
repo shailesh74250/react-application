@@ -1,0 +1,90 @@
+Automating deployment and continuous integration ensures that your application is reliably built, tested, and deployed.
+
+Best Practices
+Use CI/CD Pipelines:
+
+Automate testing, building, and deployment processes using tools like GitHub Actions, Travis CI, or Jenkins.
+Environment Variables:
+
+Manage configuration using environment variables for different environments (development, staging, production).
+Optimized Builds:
+
+Generate optimized production builds using tools like Webpack or leveraging frameworks' built-in optimizations.
+Monitor Deployments:
+
+Use monitoring tools to track application performance and errors post-deployment.
+Rollback Strategies:
+
+Implement strategies to revert to previous stable versions in case of deployment failures.
+
+
+# .github/workflows/ci-cd.yml
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Lint
+        run: npm run lint
+
+      - name: Run Tests
+        run: npm run test -- --coverage
+
+      - name: Build
+        run: npm run build
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: build/
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Download Artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: build
+          path: build/
+
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v1.2
+        with:
+          publish-dir: ./build
+          production-deploy: true
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+
+
+
+Configure Secrets:
+
+NETLIFY_AUTH_TOKEN: Your Netlify personal access token.
+NETLIFY_SITE_ID: The ID of your Netlify site.
+Push Changes:
+
+Commit and push the workflow file to trigger the CI/CD pipeline.
