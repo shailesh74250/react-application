@@ -1,0 +1,39 @@
+Project Structure and Organization
+
+my-app/
+├── public/
+│   ├── index.html
+│   └── assets/
+├── src/
+│   ├── components/
+│   │   ├── common/
+│   │   └── specific/
+│   ├── hooks/
+│   ├── pages/
+│   ├── services/
+│   ├── store/
+│   ├── styles/
+│   ├── utils/
+│   ├── App.tsx
+│   ├── index.tsx
+│   └── routes.tsx
+├── tests/
+├── .gitignore
+├── package.json
+├── tsconfig.json
+└── README.md
+
+
+Explanation
+- public: Contains static assets like - index.html, images, and other public resources.
+- src/: Main source code direcotry
+  - components/: Reusable UI components, further divided into common/ (shared across multiple parts) and specific/ (specific to certain features).
+  - hooks/: Custom React hooks.
+  - pages/: Page components corresponding to routes.
+  - services/: API calls and business logic.
+  - store/: State management setup (e.g., Redux).
+  - styles/: Global styles, theming, and CSS/SASS files.
+  - utils/: Utility functions and helpers.
+  - App.tsx: Root component.
+  - index.tsx: Entry point.
+  - routes.tsx: Route definitions.
