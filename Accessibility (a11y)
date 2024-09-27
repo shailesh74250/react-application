@@ -1,0 +1,21 @@
+Ensuring your application is accessible makes it usable for everyone, including people with disabilities.
+
+Best Practices
+Semantic HTML:
+
+Use appropriate HTML elements (<button>, <header>, <nav>, etc.) for better accessibility.
+ARIA Attributes:
+
+Use ARIA roles and attributes to enhance accessibility where necessary.
+Keyboard Navigation:
+
+Ensure all interactive elements are reachable and operable via keyboard.
+Alt Text for Images:
+
+Provide descriptive alt attributes for images.
+Focus Management:
+
+Manage focus appropriately, especially in modals and dynamic content.
+Color Contrast:
+
+Ensure sufficient color contrast between text and backgrounds.
